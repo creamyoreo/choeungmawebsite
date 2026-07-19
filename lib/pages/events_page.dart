@@ -126,11 +126,11 @@ class _PastEventCard extends StatelessWidget {
           children: [
             _InfoChip(
               icon: Icons.calendar_today_rounded,
-              label: event.timeLabel.isEmpty
-                  ? event.dateLabel
-                  : '${event.dateLabel} · ${event.timeLabel}',
+              label: event.dateLabel,
               flagged: event.dateNeedsEditing,
             ),
+            if (event.timeLabel.isNotEmpty)
+              _InfoChip(icon: Icons.schedule_rounded, label: event.timeLabel),
             if (event.location.isNotEmpty)
               _InfoChip(icon: Icons.place_rounded, label: event.location),
             if (event.priceLabel.isNotEmpty)
@@ -198,19 +198,30 @@ class _InfoChip extends StatelessWidget {
         borderRadius: BorderRadius.circular(100),
         border: Border.all(color: AppColors.pinkLight, width: 1.5),
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 16, color: AppColors.pinkDark),
-          const SizedBox(width: 6),
-          Text(
-            label,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.ink,
-                ),
-          ),
-        ],
+      // Bounded so a long label wraps to a second line instead of
+      // overflowing when the Wrap gives this chip a narrow line.
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 260),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 2),
+              child: Icon(icon, size: 16, color: AppColors.pinkDark),
+            ),
+            const SizedBox(width: 6),
+            Flexible(
+              child: Text(
+                label,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.ink,
+                    ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

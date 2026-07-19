@@ -6,6 +6,7 @@ import '../widgets/responsive.dart';
 import '../widgets/section.dart';
 import '../widgets/silhouette_avatar.dart';
 import '../widgets/site_scaffold.dart';
+import '../widgets/story_section.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
@@ -17,6 +18,7 @@ class AboutPage extends StatelessWidget {
       child: Column(
         children: [
           _Intro(),
+          StorySection(),
           _TeamSection(),
         ],
       ),
