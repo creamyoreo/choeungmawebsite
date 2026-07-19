@@ -63,6 +63,10 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/events/event1/
+    - assets/images/events/event2/
+    - assets/images/events/event3/
+    - assets/images/events/event4/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
